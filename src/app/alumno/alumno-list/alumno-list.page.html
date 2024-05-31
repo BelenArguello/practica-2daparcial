@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+    <ion-toolbar *ngIf="!isSearch">
+        <ion-title>Listado de Alumnos</ion-title>
+        <ion-buttons slot="primary">
+            <ion-button (click)="clickSearch()">
+                <ion-icon slot="end" name="search"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="isSearch">
+        <ion-searchbar show-cancel-button="always" show-clean-button="always" (ionClear)="clearSearch()" (ionChange)="buscarSearch($event)"></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid>
+        <ion-row>
+            <ion-col><strong>Nombre</strong></ion-col>
+            <ion-col><strong>Apellido</strong></ion-col>
+            <ion-col><strong>Regular</strong></ion-col>
+
+        </ion-row>
+        <ion-row *ngFor="let alumno of listaAlumnos" [routerLink]="['/alumno-edit/' + alumno.id]">
+            <ion-col>{{alumno.nombre}}</ion-col>
+            <ion-col>{{alumno.apellido}}</ion-col>
+            <ion-col>{{alumno.regular}}</ion-col>
+
+        </ion-row>
+    </ion-grid>
+
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button [routerLink]="['/alumno-edit/new']">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

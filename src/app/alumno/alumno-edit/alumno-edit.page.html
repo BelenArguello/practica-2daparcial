@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-title>{{ isNew ? 'Nuevo' : 'Editar' }} Alumno</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/alumno-list"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="primary">
+            <ion-button [disabled]="nombre.invalid || apellido.invalid" fill="solid" (click)="guardarAlumno()">
+                Guardar
+            </ion-button>
+            <ion-button *ngIf="!isNew" fill="solid" (click)="eliminarAlumno()" color="danger">
+                <ion-icon slot="end" name="trash"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-list>
+        <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="alumno.nombre" #nombre="ngModel" name="nombre" required type="text"></ion-input>
+            <ion-icon *ngIf="nombre.invalid && nombre.touched" slot="end" name="alert-circle-outline" color="danger"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Apellido</ion-label>
+            <ion-input [(ngModel)]="alumno.apellido" #apellido="ngModel" name="apellido" required type="text"></ion-input>
+            <ion-icon *ngIf="apellido.invalid && apellido.touched" slot="end" name="alert-circle-outline" color="danger"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">C.I.</ion-label>
+            <ion-input [(ngModel)]="alumno.ci" #ci="ngModel" name="ci" required type="text"></ion-input>
+            <ion-icon *ngIf="ci.invalid && ci.touched" slot="end" name="alert-circle-outline" color="danger"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Edad</ion-label>
+            <ion-input [(ngModel)]="alumno.edad" #edad="ngModel" name="edad" required type="number"></ion-input>
+            <ion-icon *ngIf="edad.invalid && edad.touched" slot="end" name="alert-circle-outline" color="danger"></ion-icon>
+        </ion-item>
+
+        <ion-item lines="none">
+            <ion-label>Regular</ion-label>
+            <ion-checkbox [(ngModel)]="alumno.regular" #regular="ngModel" name="regular" required></ion-checkbox>
+            <ion-icon *ngIf="regular.invalid && regular.touched" slot="end" name="alert-circle-outline" color="danger"></ion-icon>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Fecha de Inscripción</ion-label>
+            <ion-input [(ngModel)]="alumno.fecha_inscripcion" type="date" #fecha_inscripcion="ngModel" name="fecha_inscripcion" required></ion-input>
+            <ion-icon *ngIf="fecha_inscripcion.invalid && fecha_inscripcion.touched" slot="end" name="alert-circle-outline" color="danger"></ion-icon>
+        </ion-item>
+    </ion-list>
+</ion-content>
